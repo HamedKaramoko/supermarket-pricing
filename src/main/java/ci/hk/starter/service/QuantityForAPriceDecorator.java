@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import ci.hk.starter.model.Quantity;
 import ci.hk.starter.model.SimpleQuantity;
+import ci.hk.starter.model.SimpleResult;
 
 public class QuantityForAPriceDecorator extends PriceCalculatorServiceDecorator {
 	
@@ -21,7 +22,7 @@ public class QuantityForAPriceDecorator extends PriceCalculatorServiceDecorator 
 	}
 	
 	@Override
-	public BigDecimal calculatePrice(Quantity quantity) {
+	public SimpleResult calculatePrice(Quantity quantity) {
 		
 		if(!(quantity instanceof SimpleQuantity)) {
 			throw new IllegalArgumentException("This quantity cannot be applied to this type of Product");
@@ -33,11 +34,11 @@ public class QuantityForAPriceDecorator extends PriceCalculatorServiceDecorator 
 		
 		int nbWithoutDiscount = sQuantity.getAmount() % quantityForDiscount ;
 		
-		BigDecimal b1 = discountPrice.multiply(BigDecimal.valueOf(nbWithDiscount));
+		BigDecimal partWithDiscoutPrice = discountPrice.multiply(BigDecimal.valueOf(nbWithDiscount));
 		
-		BigDecimal b2 = priceCalculatorService.calculatePrice(new SimpleQuantity(nbWithoutDiscount));
+		SimpleResult partWithoutDiscoutPrice = priceCalculatorService.calculatePrice(new SimpleQuantity(nbWithoutDiscount));
 		
-		return b1.add(b2);
+		return new SimpleResult(sQuantity.getAmount(), partWithoutDiscoutPrice.getFinalPrice() + partWithDiscoutPrice.doubleValue());
 	}
 
 }

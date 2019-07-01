@@ -1,8 +1,7 @@
 package ci.hk.starter.service;
 
-import java.math.BigDecimal;
-
 import ci.hk.starter.model.Quantity;
+import ci.hk.starter.model.SimpleResult;
 
 public abstract class PriceCalculatorServiceDecorator implements PriceCalculatorService {
 	
@@ -13,7 +12,7 @@ public abstract class PriceCalculatorServiceDecorator implements PriceCalculator
 	}
 
 	@Override
-	public BigDecimal calculatePrice(Quantity quantity) {
+	public SimpleResult calculatePrice(Quantity quantity) {
 		
 		return priceCalculatorService.calculatePrice(quantity);
 	}

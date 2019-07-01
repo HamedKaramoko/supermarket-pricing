@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
-import java.util.function.Function;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,6 +13,7 @@ import ci.hk.starter.model.ItemLine;
 import ci.hk.starter.model.Product;
 import ci.hk.starter.model.SimplePriceProduct;
 import ci.hk.starter.model.SimpleQuantity;
+import ci.hk.starter.model.SimpleResult;
 import ci.hk.starter.model.Weight;
 import ci.hk.starter.model.WeightQuantity;
 import ci.hk.starter.service.PriceCalculatorService;
@@ -39,12 +39,14 @@ public class CmdLineRunner implements CommandLineRunner {
 				new ItemLine(redApple, new SimpleQuantity(4)),
 				new ItemLine(potatoes, new WeightQuantity(4, Weight.OUNCE)));
 		
+		items.stream()
+		.map(item -> getPriceCalculator(item.getProduct()).calculatePrice(item.getQuantity())).forEach(System.out::println);
 		
-		DoubleSummaryStatistics finalResult = items.stream()
-		.map((Function<ItemLine, BigDecimal>)item -> getPriceCalculator(item.getProduct()).calculatePrice(item.getQuantity()))
-		.mapToDouble(linePrice -> linePrice.doubleValue()).summaryStatistics();
+		DoubleSummaryStatistics finalPrice = items.stream()
+		.map(item -> getPriceCalculator(item.getProduct()).calculatePrice(item.getQuantity()))
+		.mapToDouble(SimpleResult::getFinalPrice).summaryStatistics();
 		
-		System.out.println("The client bill cost : " + finalResult.getSum());
+		System.out.println("The client bill cost : " + finalPrice.getSum() + "$");
 		
 		
 //		PriceCalculatorService appleWithoutDiscount = redApple;

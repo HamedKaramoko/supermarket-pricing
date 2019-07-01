@@ -45,11 +45,12 @@ public class ByWeightProduct implements Product {
 	}
 	
 	@Override
-	public BigDecimal calculatePrice(Quantity quantity) {
+	public SimpleResult calculatePrice(Quantity quantity) {
 		
 		WeightQuantity wq = (WeightQuantity) quantity;
 		
-		return unitPrice.multiply(BigDecimal.valueOf(REFERENCE_WEIGHT.convert(wq.getAmount(), wq.getUnit())));
+		return new SimpleResult(wq.getAmount(),
+				unitPrice.doubleValue() * REFERENCE_WEIGHT.convert(wq.getAmount(), wq.getUnit()));
 	}
 
 	public BigDecimal getUnitPrice() {

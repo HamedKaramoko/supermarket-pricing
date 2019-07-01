@@ -27,11 +27,11 @@ public class SimplePriceProduct implements Product {
 	}
 	
 	@Override
-	public BigDecimal calculatePrice(Quantity quantity) {
+	public SimpleResult calculatePrice(Quantity quantity) {
 		
 		SimpleQuantity q = (SimpleQuantity) quantity;
 		
-		return unitPrice.multiply(BigDecimal.valueOf(q.getAmount()));
+		return new SimpleResult(q.getAmount(), unitPrice.doubleValue() * q.getAmount());
 	}
 	
 	public BigDecimal getUnitPrice() {

@@ -1,11 +1,10 @@
 package ci.hk.starter.service;
 
-import java.math.BigDecimal;
-
 import ci.hk.starter.model.Quantity;
+import ci.hk.starter.model.SimpleResult;
 
 @FunctionalInterface
 public interface PriceCalculatorService {
 
-	BigDecimal calculatePrice(Quantity quantity);
+	SimpleResult calculatePrice(Quantity quantity);
 }
