@@ -21,7 +21,7 @@ import ci.hk.starter.model.WeightQuantity;
  * @author hamedkaramoko
  *
  */
-public class NoDiscountDecoratorTest {
+public class FourtyPercentDecoratorTest {
 
 	@Before
 	public void setUp() throws Exception {
