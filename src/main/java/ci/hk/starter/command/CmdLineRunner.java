@@ -32,9 +32,6 @@ public class CmdLineRunner implements CommandLineRunner {
 		
 		Product potatoes = new ByWeightProduct("Potatoes#250009", "Potatoes", BigDecimal.valueOf(1.99), Weight.POUND);
 		
-		List<Product> products = Arrays.asList(greenApple, redApple, potatoes);
-		
-		
 		List<ItemLine> items = Arrays.asList(new ItemLine(greenApple, new SimpleQuantity(4)),
 				new ItemLine(redApple, new SimpleQuantity(4)),
 				new ItemLine(potatoes, new WeightQuantity(4, Weight.OUNCE)));
@@ -47,21 +44,6 @@ public class CmdLineRunner implements CommandLineRunner {
 		.mapToDouble(SimpleResult::getFinalPrice).summaryStatistics();
 		
 		System.out.println("The client bill cost : " + finalPrice.getSum() + "$");
-		
-		
-//		PriceCalculatorService appleWithoutDiscount = redApple;
-//		
-//		
-//		System.out.println("Without discount : " + appleWithoutDiscount.calculatePrice(quantity));
-//		
-//		System.out.println("With discount : " + appleWithDiscount.calculatePrice(quantity));
-//		
-//		
-//		
-//		
-//		Quantity wquantity = new WeightQuantity(4, Weight.OUNCE);
-//		
-//		System.out.println("By weight product without discount : " + potatoes.calculatePrice(wquantity));
 
 	}
 	
