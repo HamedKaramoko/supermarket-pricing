@@ -49,8 +49,9 @@ public class ByWeightProduct implements Product {
 		
 		WeightQuantity wq = (WeightQuantity) quantity;
 		
-		return new SimpleResult(wq.getAmount(),
-				unitPrice.doubleValue() * REFERENCE_WEIGHT.convert(wq.getAmount(), wq.getUnit()));
+		BigDecimal quantityBD = BigDecimal.valueOf(REFERENCE_WEIGHT.convert(wq.getAmount(), wq.getUnit()));
+		
+		return new SimpleResult(wq.getAmount(),	unitPrice.multiply(quantityBD));
 	}
 
 	public BigDecimal getUnitPrice() {

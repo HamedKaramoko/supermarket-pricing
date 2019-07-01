@@ -2,7 +2,6 @@ package ci.hk.starter.command;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -39,12 +38,10 @@ public class CmdLineRunner implements CommandLineRunner {
 		items.stream()
 		.map(item -> getPriceCalculator(item.getProduct()).calculatePrice(item.getQuantity())).forEach(System.out::println);
 		
-		DoubleSummaryStatistics finalPrice = items.stream()
+		items.stream()
 		.map(item -> getPriceCalculator(item.getProduct()).calculatePrice(item.getQuantity()))
-		.mapToDouble(SimpleResult::getFinalPrice).summaryStatistics();
+		.map(SimpleResult::getFinalPrice).reduce(BigDecimal::add).ifPresent(finalPrice -> System.out.println("The client bill cost : " + finalPrice + "$"));
 		
-		System.out.println("The client bill cost : " + finalPrice.getSum() + "$");
-
 	}
 	
 	public PriceCalculatorService getPriceCalculator(Product product) {

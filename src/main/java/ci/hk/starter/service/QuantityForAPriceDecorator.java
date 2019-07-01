@@ -15,10 +15,9 @@ public class QuantityForAPriceDecorator extends PriceCalculatorServiceDecorator 
 
 	public QuantityForAPriceDecorator(int quantityForDiscount, BigDecimal discountPrice, PriceCalculatorService priceCalculatorService) {
 		super(priceCalculatorService);
-		this.quantityForDiscount = quantityForDiscount;
 		
-		// Immutable pattern
-		this.discountPrice = new BigDecimal(0).add(discountPrice);
+		this.quantityForDiscount = quantityForDiscount;
+		this.discountPrice = discountPrice;
 	}
 	
 	@Override
@@ -38,7 +37,7 @@ public class QuantityForAPriceDecorator extends PriceCalculatorServiceDecorator 
 		
 		SimpleResult partWithoutDiscoutPrice = priceCalculatorService.calculatePrice(new SimpleQuantity(nbWithoutDiscount));
 		
-		return new SimpleResult(sQuantity.getAmount(), partWithoutDiscoutPrice.getFinalPrice() + partWithDiscoutPrice.doubleValue());
+		return new SimpleResult(sQuantity.getAmount(), partWithoutDiscoutPrice.getFinalPrice().add(partWithDiscoutPrice));
 	}
 
 }

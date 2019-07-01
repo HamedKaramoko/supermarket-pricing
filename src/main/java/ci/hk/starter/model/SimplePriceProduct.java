@@ -31,7 +31,7 @@ public class SimplePriceProduct implements Product {
 		
 		SimpleQuantity q = (SimpleQuantity) quantity;
 		
-		return new SimpleResult(q.getAmount(), unitPrice.doubleValue() * q.getAmount());
+		return new SimpleResult(q.getAmount(), unitPrice.multiply( BigDecimal.valueOf(q.getAmount())));
 	}
 	
 	public BigDecimal getUnitPrice() {
