@@ -43,7 +43,7 @@ public class FourtyPercentDecoratorTest {
 		
 		PriceCalculatorServiceDecorator discount = new FourtyPercentDecorator(product);
 		
-		SimpleResult expectedResult = new SimpleResult(10, BigDecimal.valueOf(60));
+		SimpleResult expectedResult = new SimpleResult(10, BigDecimal.valueOf(60.0));
 		
 		SimpleResult result = discount.calculatePrice(squantity);
 		
