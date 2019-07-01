@@ -2,19 +2,37 @@ package ci.hk.starter.model;
 
 import java.math.BigDecimal;
 
+import ci.hk.starter.service.PriceCalculatorServiceDecorator;
+
+/**
+ * Class representing product with a weight.
+ * 
+ * This class should not directly be used by the client.
+ * 
+ * @see PriceCalculatorServiceDecorator
+ * 
+ * @author hamedkaramoko
+ *
+ */
 public class ByWeightProduct implements Product {
 	
 	/**
-	 * Represents the shortest sellable unit price.
+	 * Represents reference unit.
 	 */
 	private static Weight REFERENCE_WEIGHT = Weight.OUNCE;
 	
+	/**
+	 * Product id.
+	 */
 	private String id;
 	
+	/**
+	 * Product name
+	 */
 	private String name;
 	
 	/**
-	 * Represents the price for the shortest product unit.
+	 * Represents the price for the reference unit.
 	 */
 	private BigDecimal unitPrice;
 	
@@ -54,6 +72,9 @@ public class ByWeightProduct implements Product {
 		return new SimpleResult(wq.getAmount(),	unitPrice.multiply(quantityBD));
 	}
 
+	/**
+	 * @return the unit price.
+	 */
 	public BigDecimal getUnitPrice() {
 		return unitPrice;
 	}

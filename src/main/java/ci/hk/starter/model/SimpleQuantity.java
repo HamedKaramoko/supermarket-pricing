@@ -1,12 +1,16 @@
 package ci.hk.starter.model;
 
 /**
+ * Class allowing to keep the amount of a simple product (One product -> one price)
+ * 
  * @author hamedkaramoko
- *
- *	Allow to keep the amount of a simple product (One product -> one price)
+ *	
  */
 public class SimpleQuantity implements Quantity {
 	
+	/**
+	 * The amount.
+	 */
 	private int amount;
 	
 	public SimpleQuantity(int amount) {

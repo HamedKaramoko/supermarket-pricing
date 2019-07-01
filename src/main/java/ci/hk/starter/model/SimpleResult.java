@@ -2,10 +2,22 @@ package ci.hk.starter.model;
 
 import java.math.BigDecimal;
 
+/**
+ * Class allowing to keep the calculation results.
+ * 
+ * @author hamedkaramoko
+ *
+ */
 public class SimpleResult {
 	
+	/**
+	 * Represents the final quantity.
+	 */
 	private double finalQuantity;
 	
+	/**
+	 * Represents the final price.
+	 */
 	private BigDecimal finalPrice;
 	
 	public SimpleResult(double finalQuantity, BigDecimal finalPrice) {
@@ -13,10 +25,16 @@ public class SimpleResult {
 		this.finalPrice = finalPrice;
 	}
 
+	/**
+	 * @return the final quantity.
+	 */
 	public double getFinalQuantity() {
 		return finalQuantity;
 	}
 
+	/**
+	 * @return the final price.
+	 */
 	public BigDecimal getFinalPrice() {
 		return finalPrice;
 	}
